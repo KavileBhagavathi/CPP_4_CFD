@@ -47,6 +47,7 @@ for (int i=0; i<nx; i++){
 
 int main(int argc, char* argv[]){
     if (argc>1){
+        std::string filename = "config.txt"
         simconfig config;
         config.L = std::stoi(argv[1]);
         config.nx = std::stoi(argv[2]);
@@ -66,9 +67,6 @@ int main(int argc, char* argv[]){
         // printField(u,nx);
         solve(u,config);
         printField(u,config.nx);
-
-
-
     }
     else{
         std::cout<<"Not enough arguments!\n";
