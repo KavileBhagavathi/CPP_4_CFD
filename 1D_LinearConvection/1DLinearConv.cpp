@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
+#include "utils.h"
+
 struct simconfig{
     int L;
     int nx;
@@ -8,6 +11,7 @@ struct simconfig{
     int totTime;
     double dt;
     int c;
+    std::string filename;
 };
 
 void setInitialConditions(std::vector<double>& u, const int nx){
@@ -29,16 +33,17 @@ void solve(std::vector<double>& u, const simconfig& config){
             u_next[i] = u_curr[i] - config.c*(config.dt/config.dx)*(u_curr[i] - u_curr[i-1]);
         }
         std::swap(u_curr,u_next);
+        
     }
     u = u_curr;
 }
 
 
-void printField(const std::vector<double>& u,const int nx){
-for (int i=0; i<nx; i++){
-    std::cout<<u[i]<<std::endl;
-}
-}
+// void printField(const std::vector<double>& u,const int nx){
+// for (int i=0; i<nx; i++){
+//     std::cout<<u[i]<<std::endl;
+// }
+// }
 
 int main(int argc, char* argv[]){
     if (argc>1){
@@ -49,7 +54,7 @@ int main(int argc, char* argv[]){
         config.totTime = std::stoi(argv[3]);
         config.dt = (double)config.totTime/1000;
         config.c = 1; //wavespeed
-
+        config.filename = "1dwave"
         std::cout<<"Domain Length is "<<config.L<<std::endl;
         std::cout<<"nx is "<<config.nx<<std::endl;
         std::cout<<"dx is "<<config.dx<<std::endl;
