@@ -27,10 +27,10 @@ void solve(std::vector<double>& u, const simconfig& config){
 
     std::vector<double> u_next = u;
     std::vector<double> u_curr = u;
-    for (double it=0.0; it<0.5; it+=config.dt){
+    for (double it=0.0; it<config.totTime; it+=config.dt){
         for (int i=1; i<config.nx; i++){
             //u[i] = un[i] - c * dt / dx * (un[i] - un[i-1])
-            u_next[i] = u_curr[i] - config.c*(config.dt/config.dx)*(u_curr[i] - u_curr[i-1]);
+            u_next[i] = u_curr[i] - u_curr[i]*(config.dt/config.dx)*(u_curr[i] - u_curr[i-1]);
         }
         std::swap(u_curr,u_next);
         
@@ -39,11 +39,11 @@ void solve(std::vector<double>& u, const simconfig& config){
 }
 
 
-// void printField(const std::vector<double>& u,const int nx){
-// for (int i=0; i<nx; i++){
-//     std::cout<<u[i]<<std::endl;
-// }
-// }
+void printField(const std::vector<double>& u,const int nx){
+for (int i=0; i<nx; i++){
+    std::cout<<u[i]<<std::endl;
+}
+}
 
 int main(int argc, char* argv[]){
     if (argc>1){
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]){
         config.totTime = std::stoi(argv[3]);
         config.dt = (double)config.totTime/1000;
         config.c = 1; //wavespeed
-        config.filename = "1dwave"
+        config.filename = "1dwave";
         std::cout<<"Domain Length is "<<config.L<<std::endl;
         std::cout<<"nx is "<<config.nx<<std::endl;
         std::cout<<"dx is "<<config.dx<<std::endl;
