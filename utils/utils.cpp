@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <iomanip>
@@ -15,4 +16,23 @@ void writeToFile(const std::vector<double>& vec, const std::string& filename){
     }
     oFile.close();
     std::cout <<"Data successfully written to "<<filename<<std::endl;
+}
+
+std::map<std::string,double> readConfig(const std::string& filename){
+    std::ifstream iFile(filename);
+    std::map<std::string,double> config;
+    if (!iFile.is_open()){
+        std::cerr<<"Error: could not open config file - "<<filename<<std::endl;
+        return;
+    }
+    std::string line;
+    while (std::getline(file,line)){
+        std::stringstream ss(line);
+        std::string key;
+        std::string value;
+        if (std::getline(ss,key,'=') && std::getline(ss,value)){
+            config[key] = std::stod(value);
+        } 
+    }
+    return config;
 }
