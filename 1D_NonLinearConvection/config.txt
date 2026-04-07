@@ -1,4 +1,5 @@
 L=2.0
 nx=41.0
-totTime=1.0
+totTime=0.5
+dt=0.025
 c=1.0
