@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 #include <iomanip>
+#include <map>
+
+
 void writeToFile(const std::vector<double>& vec, const std::string& filename){
     std::ofstream oFile(filename);
     oFile <<std::scientific<<std::setprecision(6);
@@ -23,10 +26,10 @@ std::map<std::string,double> readConfig(const std::string& filename){
     std::map<std::string,double> config;
     if (!iFile.is_open()){
         std::cerr<<"Error: could not open config file - "<<filename<<std::endl;
-        return;
+        return config;
     }
     std::string line;
-    while (std::getline(file,line)){
+    while (std::getline(iFile,line)){
         std::stringstream ss(line);
         std::string key;
         std::string value;
