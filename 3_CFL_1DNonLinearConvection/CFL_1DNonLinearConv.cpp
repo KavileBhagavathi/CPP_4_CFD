@@ -34,7 +34,7 @@ void solve(std::vector<double>& u, std::map<std::string,double>& config){
         std::swap(u_curr,u_next);
         std::string folder = "results/";
         std::string filename = folder+"output_"+std::to_string(it)+".txt";
-        writeToFile(u,filename);
+        writeToFile(u_curr,filename);
     }
     u = u_curr;
     // writeToFile(u,"output.txt");
