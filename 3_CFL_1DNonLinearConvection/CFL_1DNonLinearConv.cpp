@@ -25,16 +25,19 @@ void solve(std::vector<double>& u, std::map<std::string,double>& config){
     double dx = config["dx"];
     std::vector<double> u_next = u;
     std::vector<double> u_curr = u;
+    
     for (double it=0.0; it<config["totTime"]; it+=dt){
         for (int i=1; i<config["nx"]; i++){
             //u[i] = un[i] - c * dt / dx * (un[i] - un[i-1])
             u_next[i] = u_curr[i] - u_curr[i]*(dt/dx)*(u_curr[i] - u_curr[i-1]);
         }
         std::swap(u_curr,u_next);
-        
+        std::string folder = "results/";
+        std::string filename = folder+"output_"+std::to_string(it)+".txt";
+        writeToFile(u,filename);
     }
     u = u_curr;
-    writeToFile(u,"output.txt");
+    // writeToFile(u,"output.txt");
 }
 
 
