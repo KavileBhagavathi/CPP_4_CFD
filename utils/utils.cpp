@@ -5,7 +5,7 @@
 #include <string>
 #include <iomanip>
 #include <map>
-
+#include <stdexcept>
 
 void writeToFile(const std::vector<double>& vec, const std::string& filename){
     std::ofstream oFile(filename);
@@ -25,8 +25,8 @@ std::map<std::string,double> readConfig(const std::string& filename){
     std::ifstream iFile(filename);
     std::map<std::string,double> config;
     if (!iFile.is_open()){
-        std::cerr<<"Error: could not open config file - "<<filename<<std::endl;
-        return config;
+        throw std::runtime_error("Error: could not open config file - "+filename);
+        
     }
     std::string line;
     while (std::getline(iFile,line)){
