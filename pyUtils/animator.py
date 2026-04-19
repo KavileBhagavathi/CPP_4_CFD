@@ -25,7 +25,7 @@ def oneD_convection_animator(filepath):
     all_values = np.concatenate(datasets)
     ax.set_xlim(0, max(len(d) for d in datasets) - 1)
     ax.set_ylim(all_values.min() - 1, all_values.max() + 1)
-    ax.set_xlabel("x-index")
+    ax.set_xlabel("x")
     ax.set_ylabel("Amplitude")
     ax.grid(True)
     
